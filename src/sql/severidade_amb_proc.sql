@@ -1,5 +1,5 @@
-select 
-    /*T1."Classificacao",*/
+select
+    T2."CD_PROCEDIMENTO",
     T3."Classificacao",
     T1."FAIXA_ETARIA",
     COUNT(*)
@@ -21,6 +21,6 @@ OR      "CD_MUNICIPIO_BENEFICIARIO" == 430930
 OR      "CD_MUNICIPIO_BENEFICIARIO" == 431490
 OR      "CD_MUNICIPIO_BENEFICIARIO" == 432300
 
-GROUP BY T3."Classificacao", T1."FAIXA_ETARIA"
-ORDER BY T3."Classificacao", T1."FAIXA_ETARIA"
+GROUP BY T2."CD_PROCEDIMENTO", T3."Classificacao", T1."FAIXA_ETARIA"
+ORDER BY T2."CD_PROCEDIMENTO", T3."Classificacao", T1."FAIXA_ETARIA"
 ;

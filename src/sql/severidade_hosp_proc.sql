@@ -1,12 +1,12 @@
 select 
-    /*T1."Classificacao",*/
+    T2."CD_PROCEDIMENTO",
     T3."Classificacao",
     T1."FAIXA_ETARIA",
     COUNT(*)
 
-FROM amb_cons as T1
+FROM hosp_cons as T1
 
-LEFT join amb_det as T2
+LEFT join hosp_det as T2
 ON T1."ID_EVENTO_ATENCAO_SAUDE" = T2."ID_EVENTO_ATENCAO_SAUDE"
 
 LEFT JOIN classificacao as T3
@@ -21,6 +21,6 @@ OR      "CD_MUNICIPIO_BENEFICIARIO" == 430930
 OR      "CD_MUNICIPIO_BENEFICIARIO" == 431490
 OR      "CD_MUNICIPIO_BENEFICIARIO" == 432300
 
-GROUP BY T3."Classificacao", T1."FAIXA_ETARIA"
-ORDER BY T3."Classificacao", T1."FAIXA_ETARIA"
+GROUP BY T2."CD_PROCEDIMENTO", T3."Classificacao", T1."FAIXA_ETARIA"
+ORDER BY T2."CD_PROCEDIMENTO", T3."Classificacao", T1."FAIXA_ETARIA"
 ;

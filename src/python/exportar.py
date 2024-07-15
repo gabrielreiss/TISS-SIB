@@ -17,5 +17,5 @@ def exportar(file:str):
     df = pd.read_sql_query(data, conn)
     df.to_csv(f"{file}.csv", index=False, sep=';', decimal=',')
 
-exportar('severidade_amb')
-exportar('severidade_hosp')
+exportar('severidade_amb_proc')
+exportar('severidade_hosp_proc')
