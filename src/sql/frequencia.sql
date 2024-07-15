@@ -1,0 +1,37 @@
+SELECT T1.teste as "Faixa",
+        COUNT(T1.teste) as "Qnt"
+FROM (
+select 
+        CASE 
+        WHEN "DT_NASCIMENTO" >= (2024 - 18) THEN "0 a 18" 
+        WHEN "DT_NASCIMENTO" <= (2024 - 19) AND "DT_NASCIMENTO" >= (2024 - 23) THEN "19 a 23"
+        WHEN "DT_NASCIMENTO" <= (2024 - 24) AND "DT_NASCIMENTO" >= (2024 - 28) THEN "24 a 28"
+        WHEN "DT_NASCIMENTO" <= (2024 - 29) AND "DT_NASCIMENTO" >= (2024 - 33) THEN "29 a 33"
+        WHEN "DT_NASCIMENTO" <= (2024 - 34) AND "DT_NASCIMENTO" >= (2024 - 38) THEN "34 a 38"
+        WHEN "DT_NASCIMENTO" <= (2024 - 39) AND "DT_NASCIMENTO" >= (2024 - 43) THEN "39 a 43"
+        WHEN "DT_NASCIMENTO" <= (2024 - 44) AND "DT_NASCIMENTO" >= (2024 - 48) THEN "44 a 48"
+        WHEN "DT_NASCIMENTO" <= (2024 - 49) AND "DT_NASCIMENTO" >= (2024 - 53) THEN "49 a 53"
+        WHEN "DT_NASCIMENTO" <= (2024 - 54) AND "DT_NASCIMENTO" >= (2024 - 58) THEN "54 a 58"
+        WHEN "DT_NASCIMENTO" <= (2024 - 59) THEN "59 ou +"
+        ELSE "z.restante" END as teste
+
+from beneficiarios_ativos
+
+WHERE   "CD_MUNICIPIO" == 430060
+OR      "CD_MUNICIPIO" == 430310
+OR      "CD_MUNICIPIO" == 430460
+OR      "CD_MUNICIPIO" == 430676
+OR      "CD_MUNICIPIO" == 430920
+OR      "CD_MUNICIPIO" == 430930
+OR      "CD_MUNICIPIO" == 431490
+OR      "CD_MUNICIPIO" == 432300
+
+/*                        
+GROUP BY "DT_NASCIMENTO"
+ORDER BY "DT_NASCIMENTO"
+*/
+) as T1
+
+GROUP BY T1.teste
+ORDER BY T1.teste
+;
