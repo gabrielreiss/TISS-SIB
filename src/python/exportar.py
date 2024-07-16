@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine
-#import sqlite3
+from datetime import datetime
 
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 DIR_CONTAS_MEDICAS = os.path.abspath(os.path.join(os.path.dirname(BASE_DIR), 'contas_medicas'))
@@ -12,10 +12,15 @@ engine = create_engine(sql_str)
 conn = engine.connect()
 
 def exportar(file:str):
+    print(f"Exportando:{file}")
+    start=datetime.now()
     with open(os.path.join(SQL_DIR, f'{file}.sql'), "r", encoding="utf-8") as f:
         data = f.read()
     df = pd.read_sql_query(data, conn)
     df.to_csv(f"{file}.csv", index=False, sep=';', decimal=',')
+    print(f"Exportado:{file} em: {datetime.now()-start}")
 
+exportar('severidade_amb')
+exportar('severidade_hosp')
 exportar('severidade_amb_proc')
 exportar('severidade_hosp_proc')
