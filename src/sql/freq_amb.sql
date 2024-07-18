@@ -1,6 +1,7 @@
 select 
     /*T1."Classificacao",*/
-    T3."Classificacao" as "Classificacao",
+    T4."Classificacao" as "Classificacao2",
+    T3.`Item do SIP (grandes grupos)` as "Classificacao",
     T1."FAIXA_ETARIA" as "FAIXA_ETARIA",
     COUNT(DISTINCT T1."ID_EVENTO_ATENCAO_SAUDE") as "Freq",
     SUM(T2."VL_ITEM_EVENTO_INFORMADO") as "Soma",
@@ -8,23 +9,17 @@ select
     AVG(T2."VL_ITEM_EVENTO_INFORMADO"*T2."VL_ITEM_EVENTO_INFORMADO") - AVG(T2."VL_ITEM_EVENTO_INFORMADO")*AVG(T2."VL_ITEM_EVENTO_INFORMADO") as "VAR",
     POWER(AVG(T2."VL_ITEM_EVENTO_INFORMADO"*T2."VL_ITEM_EVENTO_INFORMADO") - AVG(T2."VL_ITEM_EVENTO_INFORMADO")*AVG(T2."VL_ITEM_EVENTO_INFORMADO"), 0.5) as "STD"
 
-FROM amb_cons as T1
+FROM amb_cons_filtrada as T1
 
 LEFT join amb_det as T2
 ON T1."ID_EVENTO_ATENCAO_SAUDE" = T2."ID_EVENTO_ATENCAO_SAUDE"
 
-LEFT JOIN classificacao as T3
-ON T2."CD_PROCEDIMENTO" = T3.`ï»¿Codigo`
+LEFT JOIN sip-tuss as T3
+ON T2."CD_PROCEDIMENTO" = T3.`Código do Termo (Tab 22 - TUSS)`
 
-WHERE   "CD_MUNICIPIO_BENEFICIARIO" == 430060
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 430310
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 430460
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 430676
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 430920
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 430930
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 431490
-OR      "CD_MUNICIPIO_BENEFICIARIO" == 432300
+LEFT JOIN classificacao as T4
+ON T2."CD_PROCEDIMENTO" = T4."ï»¿Codigo"
 
-GROUP BY T3."Classificacao", T1."FAIXA_ETARIA"
-ORDER BY T3."Classificacao", T1."FAIXA_ETARIA"
+GROUP BY T4."Classificacao", T3.`Item do SIP (grandes grupos)`, T1."FAIXA_ETARIA"
+ORDER BY T4."Classificacao", T3.`Item do SIP (grandes grupos)`, T1."FAIXA_ETARIA"
 ;
