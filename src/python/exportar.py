@@ -17,7 +17,7 @@ def exportar(file:str):
     with open(os.path.join(SQL_DIR, f'{file}.sql'), "r", encoding="utf-8") as f:
         data = f.read()
     df = pd.read_sql_query(data, conn)
-    df.to_csv(f"{file}.csv", index=False, sep=';', decimal=',', encoding='UTF-8')
+    df.to_csv(f"{file}.csv", index=False, sep=';', decimal=',', encoding='latin-1')
     print(f"Exportado:{file} em: {datetime.now()-start}")
 
 #exportar('freq_hosp')
@@ -27,6 +27,7 @@ def exportar(file:str):
 #exportar('severidade_amb')
 #exportar('severidade_amb_proc')
 
-exportar('freq_union')
-exportar('freq_union_valor')
-exportar('freq_union_proc')
+#exportar('freq_union')
+#exportar('freq_union_valor')
+#exportar('freq_union_proc')
+exportar('laboratorial')

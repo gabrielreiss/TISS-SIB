@@ -1,6 +1,9 @@
 SELECT  
     "Classificacao2",
     "Classificacao",
+    "CD_PROCEDIMENTO",
+    "Descricao",
+    "Observações",
     "FAIXA_ETARIA",
     COUNT(DISTINCT "ID_EVENTO_ATENCAO_SAUDE") AS "Freq",
     SUM("VL_ITEM_EVENTO_INFORMADO") AS "Soma",
@@ -14,7 +17,9 @@ FROM (
         T3.`Item do SIP (grandes grupos)` AS "Classificacao",
         T1."FAIXA_ETARIA" AS "FAIXA_ETARIA",
         T1."ID_EVENTO_ATENCAO_SAUDE" AS "ID_EVENTO_ATENCAO_SAUDE",
-        T2."VL_ITEM_EVENTO_INFORMADO" AS "VL_ITEM_EVENTO_INFORMADO"
+        T2."VL_ITEM_EVENTO_INFORMADO" AS "VL_ITEM_EVENTO_INFORMADO",
+        T4."Descricao" as "Descricao",
+        T3."Observações" as "Observações"
 
     FROM amb_cons_filtrada AS T1
 
@@ -35,7 +40,9 @@ FROM (
         T3.`Item do SIP (grandes grupos)` AS "Classificacao",
         T1."FAIXA_ETARIA" AS "FAIXA_ETARIA",
         T1."ID_EVENTO_ATENCAO_SAUDE" AS "ID_EVENTO_ATENCAO_SAUDE",
-        T2."VL_ITEM_EVENTO_INFORMADO" AS "VL_ITEM_EVENTO_INFORMADO"
+        T2."VL_ITEM_EVENTO_INFORMADO" AS "VL_ITEM_EVENTO_INFORMADO",
+        T4."Descricao" as "Descricao",
+        T3."Observações" as "Observações"
        
     FROM hosp_cons_filtrada AS T1
 
