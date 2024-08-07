@@ -155,3 +155,28 @@ CREATE TABLE hosp_cons_filtrada(
         IND_ACIDENTE_DOENCA REAL,
         LG_VALOR_PREESTABELECIDO INT
 );
+CREATE TABLE tuss23 (
+        cod BIGINT,
+        termo TEXT
+);
+CREATE TABLE tuss57 (
+        cod BIGINT,
+        "Termo" TEXT,
+        "Data de início de vigência" FLOAT,
+        "Data de fim de vigência" TEXT,
+        "Data de fim de implantaç?o" TEXT
+);
+CREATE TABLE tuss41 (
+        "Código do Termo" BIGINT,
+        "Termo" TEXT,
+        "Data de início de vigência" TEXT,
+        "Data de fim de vigência" FLOAT,
+        "Data de fim de implantaç?o" TEXT
+);
+CREATE TABLE tuss39 (
+        "Código do Termo" BIGINT,
+        "Termo" TEXT,
+        "Data de início de vigência" TEXT,
+        "Data de fim de vigência" FLOAT,
+        "Data de fim de implantaç?o" TEXT
+);

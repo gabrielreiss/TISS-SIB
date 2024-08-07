@@ -13,21 +13,24 @@ conn = engine.connect()
 def import_dados(file:str, table:str):
     try:
         print(f"Tentando inserir dados do arquivo: {file}")
-        df = pd.read_csv(file,
+        chunk_size = 10 ** 6
+        for chunk in pd.read_csv(file,
                         sep=";",
                         decimal=',',
                         thousands='.',
-                        encoding='latin-1')
-        df.to_sql(table, conn, if_exists= 'append', index=False)
+                        encoding='latin-1',
+                        chunksize=chunk_size):
+            chunk.to_sql(table, conn, if_exists= 'append', index=False)
         print(f"Dados do arquivo {file} inseridos com sucesso")
     except Exception as e:
         print(f"ERRO no arquivo{file}: {e}")
 
 #SIB ativos
-#BENEFICIARIOS_DIR = os.path.join(DATA_DIR, 'ativos')
-#files = [f for f in os.listdir(BENEFICIARIOS_DIR) if os.path.isfile(os.path.join(BENEFICIARIOS_DIR, f)) and f.endswith('.csv')]#
-#for file in files:
-#    import_dados(os.path.join(BENEFICIARIOS_DIR,file), "beneficiarios_ativos")
+BENEFICIARIOS_DIR = os.path.join(DATA_DIR, 'ativos')
+files = [f for f in os.listdir(BENEFICIARIOS_DIR) if os.path.isfile(os.path.join(BENEFICIARIOS_DIR, f)) and f.endswith('.csv')]#
+for file in files:
+    import_dados(os.path.join(BENEFICIARIOS_DIR,file), "beneficiarios_ativos")
+
 #import_dados(os.path.join(DATA_DIR, 'classificacao.csv'), 'classificacao')
 
 #TISS ambulatorio
@@ -42,7 +45,13 @@ def import_zip(DATA_DIR, nome):
                 with zf.open(file) as f:
                     import_dados(f, nome)
 
-import_zip(DATA_DIR, 'amb_det')
-import_zip(DATA_DIR, 'amb_cons')
-import_zip(DATA_DIR, 'hosp_cons')
-import_zip(DATA_DIR, 'hosp_det')
+#import_zip(DATA_DIR, 'amb_det')
+#import_zip(DATA_DIR, 'amb_cons')
+#import_zip(DATA_DIR, 'hosp_cons')
+#import_zip(DATA_DIR, 'hosp_det')
+
+#import_dados(os.path.join(DATA_DIR, 'TUSS22.csv'), 'tuss23')
+#import_dados(os.path.join(DATA_DIR, 'tabela57.csv'), 'tuss57')
+#import_dados(os.path.join(DATA_DIR, 'tabela41.csv'), 'tuss41')
+#import_dados(os.path.join(DATA_DIR, 'tabela39.csv'), 'tuss39')
+
